@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "customer")
-public class CurtomerEntity extends BaseEntity
+public class CustomerEntity extends BaseEntity
 {
 
     @Column(name = "first_name")

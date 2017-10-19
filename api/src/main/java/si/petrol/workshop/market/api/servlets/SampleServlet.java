@@ -1,14 +1,11 @@
 package si.petrol.workshop.market.api.servlets;
 
-import org.apache.logging.log4j.core.appender.ConsoleAppender;
 import si.petrol.workshop.market.lib.enums.CustomerStatus;
 import si.petrol.workshop.market.models.db.AddressEntity;
-import si.petrol.workshop.market.models.db.CurtomerEntity;
+import si.petrol.workshop.market.models.db.CustomerEntity;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +26,7 @@ public class SampleServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        CurtomerEntity cust = new CurtomerEntity();
+        CustomerEntity cust = new CustomerEntity();
         cust.setFirstName("Borut");
         cust.setLastName("Komac");
         cust.setStatus(CustomerStatus.ACTIVE);
