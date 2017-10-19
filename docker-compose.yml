@@ -1,0 +1,17 @@
+version: "3"
+services:
+  db:
+    image: postgres:9.6.3
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - 4369:4369
+      - 15672:15672
+      - 5672:5672
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbit
+      RABBITMQ_DEFAULT_PASS: rabbit

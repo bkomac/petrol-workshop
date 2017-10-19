@@ -1,0 +1,9 @@
+INSERT INTO public.addresses (id, city, country, country_alpha2, country_alpha3, created_at, postal_code, street_name, street_number, updated_at) VALUES ('55228f4e-9b53-433c-be1b-0625809f9b2e', 'Ljubljana', 'Slovenia', 'SI', 'SVN', '2017-10-19 05:43:31.931000', '1000', 'Pod topoli', '12', '2017-10-19 05:43:31.931000');
+
+INSERT INTO public.customers (id, created_at, date_of_birth, email, first_name, last_name, status, updated_at, address_id) VALUES ('82e98917-5020-410c-8f08-6099b99c38df', '2017-10-19 05:43:31.931000', '1992-11-11', 'kaja.novak@me.com', 'Kaja', 'Novak', 'ACTIVE', '2017-10-19 05:43:31.931000', '55228f4e-9b53-433c-be1b-0625809f9b2e');
+
+INSERT INTO public.suppliers (id, company_name, created_at, status, updated_at) VALUES ('cc2db75e-c792-4edd-ab0b-c7c9cf422064', 'ACME Corporation', '2017-10-19 05:44:14.204000', 'ACTIVE', '2017-10-19 05:44:15.590000');
+INSERT INTO public.suppliers (id, company_name, created_at, status, updated_at) VALUES ('4db21e30-2669-491e-b9e3-4a894b9d1d5e', 'Petrol d.d.', '2017-10-19 05:45:01.697000', 'ACTIVE', '2017-10-19 05:45:06.968000');
+
+INSERT INTO public.products (id, created_at, currency, price, title, updated_at, supplier_id) VALUES ('56940cf3-1de4-4c4a-9523-f29e39ddf00b', '2017-10-19 05:45:39.906000', 'CNY', 200, 'Online e-ticket', '2017-10-19 05:45:39.906000', 'cc2db75e-c792-4edd-ab0b-c7c9cf422064');
+INSERT INTO public.products (id, created_at, currency, price, title, updated_at, supplier_id) VALUES ('dc73c991-f489-477b-9496-eacf2be231b5', '2017-10-19 05:46:30.365000', 'EUR', 16, 'AKG Headphones', '2017-10-19 05:46:30.365000', '4db21e30-2669-491e-b9e3-4a894b9d1d5e');

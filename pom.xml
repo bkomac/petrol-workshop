@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>si.petrol.workshop</groupId>
+    <artifactId>market</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <modules>
+        <module>models</module>
+        <module>lib</module>
+        <module>services</module>
+        <module>api</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <name>Petrol Workshop Market</name>
+
+    <inceptionYear>2017</inceptionYear>
+    <description>Petrol Workshop Market is a one stop shop for getting all your workshop tools and services.</description>
+
+    <url>https://petrol.si</url>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <version.kumuluzee>2.4.1</version.kumuluzee>
+        <version.kumuluzee-logs>1.3.0</version.kumuluzee-logs>
+        <version.kumuluzee-rest>1.1.0</version.kumuluzee-rest>
+        <version.kumuluzee-cors>1.0.2</version.kumuluzee-cors>
+
+        <version.eclipselink>2.6.4</version.eclipselink>
+        <version.jackson>2.8.10</version.jackson>
+        <version.postgres>42.1.4</version.postgres>
+        <version.rabbitmq>5.0.0</version.rabbitmq>
+
+        <version.liquibase.plugin>3.5.3</version.liquibase.plugin>
+        <version.maven.processor.plugin>2.2.4</version.maven.processor.plugin>
+    </properties>
+
+    <scm>
+        <connection>scm:git:git@git.cloud.si:posta/posta3d-payments.git</connection>
+        <developerConnection>scm:git:git@git.cloud.si:posta/posta3d-payments.git</developerConnection>
+        <url>git@git.cloud.si:posta/posta3d-payments.git</url>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://git.cloud.si/posta/posta3d-payments/issues</url>
+    </issueManagement>
+
+    <developers>
+        <developer>
+            <name>Tilen Faganel</name>
+            <id>tfaga</id>
+            <email>tilen.faganel@me.com</email>
+            <url>https://github.com/TFaga</url>
+        </developer>
+    </developers>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- KumuluzEE -->
+            <dependency>
+                <groupId>com.kumuluz.ee</groupId>
+                <artifactId>kumuluzee-bom</artifactId>
+                <version>${version.kumuluzee}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.kumuluz.ee.logs</groupId>
+                <artifactId>kumuluzee-logs-log4j2</artifactId>
+                <version>${version.kumuluzee-logs}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.kumuluz.ee.rest</groupId>
+                <artifactId>kumuluzee-rest-core</artifactId>
+                <version>${version.kumuluzee-rest}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.kumuluz.ee.cors</groupId>
+                <artifactId>kumuluzee-cors</artifactId>
+                <version>${version.kumuluzee-cors}</version>
+            </dependency>
+
+            <!-- Microservice -->
+            <dependency>
+                <groupId>si.petrol.workshop</groupId>
+                <artifactId>market-lib</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>si.petrol.workshop</groupId>
+                <artifactId>market-models</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>si.petrol.workshop</groupId>
+                <artifactId>market-services</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- External -->
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${version.jackson}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${version.postgres}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.rabbitmq</groupId>
+                <artifactId>amqp-client</artifactId>
+                <version>${version.rabbitmq}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.kumuluz.ee</groupId>
+                    <artifactId>kumuluzee-maven-plugin</artifactId>
+                    <version>${version.kumuluzee}</version>
+                    <executions>
+                        <execution>
+                            <id>package</id>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <version>${version.liquibase.plugin}</version>
+                    <executions>
+                        <execution>
+                            <phase>none</phase>
+                            <goals>
+                                <goal>update</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.bsc.maven</groupId>
+                    <artifactId>maven-processor-plugin</artifactId>
+                    <version>${version.maven.processor.plugin}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.eclipse.persistence</groupId>
+                            <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
+                            <version>${version.eclipselink}</version>
+                        </dependency>
+                    </dependencies>
+                    <executions>
+                        <execution>
+                            <id>process</id>
+                            <goals>
+                                <goal>process</goal>
+                            </goals>
+                            <phase>generate-sources</phase>
+                            <configuration>
+                                <outputDirectory>${project.build.directory}/generated-sources/metamodel</outputDirectory>
+                                <compilerArguments>
+                                    -Aeclipselink.persistencexml=${project.basedir}/src/main/resources/META-INF/persistence.xml
+                                </compilerArguments>
+                                <processors>
+                                    <processor>org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor
+                                    </processor>
+                                </processors>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
