@@ -1,6 +1,7 @@
 package si.petrol.workshop.market.services.impl;
 
 import si.petrol.workshop.market.lib.Customer;
+import si.petrol.workshop.market.lib.responses.CountWrapper;
 import si.petrol.workshop.market.mappers.CustomerMapper;
 import si.petrol.workshop.market.models.db.CustomerEntity;
 import si.petrol.workshop.market.services.CustomerService;
@@ -8,7 +9,9 @@ import si.petrol.workshop.market.services.CustomerService;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class CustomerServiceImpl implements CustomerService {
@@ -25,13 +28,26 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> findCustomers() {
-        return null;
+
+        TypedQuery<CustomerEntity> q1 = em.createNamedQuery("CustomerEntitiy.findAll", CustomerEntity.class);
+
+        List<CustomerEntity> custEntities = q1.getResultList();
+
+        return custEntities.stream()
+                .map(CustomerMapper::toCustomer)
+                .collect(Collectors.toList());
     }
 
 
     @Override
-    public Long findCustomersCount() {
-        return null;
+    public CountWrapper findCustomersCount() {
+        TypedQuery<Long> q1 = em.createNamedQuery("CustomerEntitiy.findAllCount", Long.class);
+        Long count = q1.getSingleResult();
+
+        CountWrapper countWrap = new CountWrapper();
+        countWrap.setCount(count);
+
+        return countWrap;
     }
 
     @Override

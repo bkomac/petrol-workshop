@@ -10,6 +10,12 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "customer")
+@NamedQueries({
+        @NamedQuery(name = "CustomerEntitiy.findAll",
+                query = "SELECT c FROM CustomerEntity c ORDER BY c.createdAt DESC "),
+        @NamedQuery(name = "CustomerEntitiy.findAllCount",
+                query = "SELECT count(c.id) FROM CustomerEntity c ")
+})
 public class CustomerEntity extends BaseEntity
 {
 
