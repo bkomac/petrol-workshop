@@ -9,7 +9,11 @@
 
         <non-jta-data-source>jdbc/WorkshopMarketDS</non-jta-data-source>
 
+        <class>si.petrol.workshop.market.models.db.AddressEntity</class>
+        <class>si.petrol.workshop.market.models.db.CurtomerEntity</class>
+
         <class>si.petrol.workshop.market.models.converters.InstantAttributeConverter</class>
+        <class>si.petrol.workshop.market.models.converters.LocalDateAttributeConverter</class>
 
         <shared-cache-mode>NONE</shared-cache-mode>
 
