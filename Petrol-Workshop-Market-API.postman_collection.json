@@ -1,0 +1,472 @@
+{
+	"info": {
+		"name": "Petrol Workshop Market API",
+		"_postman_id": "9a0bf583-b735-f6c2-151e-3d9fbfe71a56",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/customers",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/count",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/customers/count",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers",
+						"count"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/customers",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Tilen\",\n\t\"lastName\": \"Faganel\",\n\t\"email\": \"tilen.faganel@me.com\",\n\t\"status\": \"ACTIVE\",\n\t\"dateOfBirth\": \"1992-11-11\",\n\t\"address\": {\n\t\t\"streetName\": \"Pod topoli\",\n\t\t\"streetNumber\": \"12\",\n\t\t\"postalCode\": \"1000\",\n\t\t\"city\": \"Ljubljana\",\n\t\t\"country\": \"Slovenia\",\n\t\t\"countryAlpha2\": \"SI\",\n\t\t\"countryAlpha3\": \"SVN\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/customers",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/:id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/customers/502a00c0-1d46-46b4-9350-40645798125a",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers",
+						"502a00c0-1d46-46b4-9350-40645798125a"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/:id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"502a00c0-1d46-46b4-9350-40645798125a\",\n    \"createdAt\": \"2017-10-19T02:10:54.775Z\",\n    \"updatedAt\": \"2017-10-19T02:10:54.775Z\",\n    \"firstName\": \"Tilen\",\n    \"lastName\": \"Faganel\",\n    \"status\": \"ACTIVE\",\n    \"email\": \"tilen.faganel@me.com\",\n    \"dateOfBirth\": \"1992-11-11\",\n    \"address\": {\n        \"streetName\": \"Pod topoli\",\n        \"streetNumber\": \"12\",\n        \"postalCode\": \"1000\",\n        \"city\": \"Ljubljana\",\n        \"country\": \"Slovenia\",\n        \"countryAlpha2\": \"SI\",\n        \"countryAlpha3\": \"SVN\"\n    }\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/customers/502a00c0-1d46-46b4-9350-40645798125a",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers",
+						"502a00c0-1d46-46b4-9350-40645798125a"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/customers/502a00c0-1d46-46b4-9350-40645798125a",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers",
+						"502a00c0-1d46-46b4-9350-40645798125a"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/products",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/products/count",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/products/count",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"count"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/products",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Subscription\",\n\t\"price\": 200.00,\n\t\"currency\": \"CNY\",\n\t\"supplier\": {\n\t\t\"id\": \"37acff3e-eb89-4ce3-8aed-ccf7a4de8d31\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/products/:id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/products/5fc26b92-1f9e-4519-b2fc-64187cfaadd2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"5fc26b92-1f9e-4519-b2fc-64187cfaadd2"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/products/:id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"5fc26b92-1f9e-4519-b2fc-64187cfaadd2\",\n    \"createdAt\": \"2017-10-19T02:15:53.101Z\",\n    \"updatedAt\": \"2017-10-19T02:15:53.101Z\",\n    \"title\": \"Coffee\",\n    \"price\": 200,\n    \"currency\": \"CNY\",\n    \"supplier\": {\n        \"id\": \"37acff3e-eb89-4ce3-8aed-ccf7a4de8d31\",\n        \"createdAt\": \"2017-10-19T02:13:25.515Z\",\n        \"updatedAt\": \"2017-10-19T02:13:31.666Z\",\n        \"companyName\": \"Petrol d.d.\",\n        \"status\": \"ACTIVE\"\n    }\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/5fc26b92-1f9e-4519-b2fc-64187cfaadd2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"5fc26b92-1f9e-4519-b2fc-64187cfaadd2"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/products/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/products/afaa03fb-bc49-4745-8fa9-0e801c6c18f8",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						"afaa03fb-bc49-4745-8fa9-0e801c6c18f8"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/carts",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/carts",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"carts"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/carts/:id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/carts/76bff30d-6c6d-42a8-8b2e-f05e6c0fcace",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"carts",
+						"76bff30d-6c6d-42a8-8b2e-f05e6c0fcace"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/carts/:id/items",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"quantity\": 1,\n\t\"product\": {\n\t\t\"id\": \"347eaeb3-0e91-4ad2-8059-4a36cb32a788\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/carts/76bff30d-6c6d-42a8-8b2e-f05e6c0fcace/items",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"carts",
+						"76bff30d-6c6d-42a8-8b2e-f05e6c0fcace",
+						"items"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/carts/:id/items/:itemId",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/carts/76bff30d-6c6d-42a8-8b2e-f05e6c0fcace/items/afdeab86-a6f9-43b1-8de2-b2b89628b5ce",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"carts",
+						"76bff30d-6c6d-42a8-8b2e-f05e6c0fcace",
+						"items",
+						"afdeab86-a6f9-43b1-8de2-b2b89628b5ce"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/orders",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/orders",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"cart\": {\n\t\t\"id\": \"7c8435e9-19c1-4a28-bd84-521133794875\"\n\t},\n\t\"customer\": {\n\t\t\"id\": \"5e716f79-3612-4277-959a-94e7f33b1c3c\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/orders",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/orders/:id/cancel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{baseUrl}}/orders/8b08d251-dde5-4da2-a00c-f5695885f567/cancel",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						"8b08d251-dde5-4da2-a00c-f5695885f567",
+						"cancel"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/orders/:id/complete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nonce\": \"12345\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/orders/b9e61604-8100-43fa-ba87-f6a5d25cb337/complete",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						"b9e61604-8100-43fa-ba87-f6a5d25cb337",
+						"complete"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
