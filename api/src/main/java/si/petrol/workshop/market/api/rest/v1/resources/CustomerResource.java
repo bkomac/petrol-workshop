@@ -3,6 +3,7 @@ package si.petrol.workshop.market.api.rest.v1.resources;
 import si.petrol.workshop.market.lib.Customer;
 import si.petrol.workshop.market.services.CustomerService;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -10,6 +11,7 @@ import javax.ws.rs.core.Response;
 
 
 @Path("/customers")
+@ApplicationScoped
 @Produces(MediaType.APPLICATION_JSON)
 public class CustomerResource {
 

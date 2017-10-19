@@ -5,10 +5,12 @@ import si.petrol.workshop.market.mappers.CustomerMapper;
 import si.petrol.workshop.market.models.db.CustomerEntity;
 import si.petrol.workshop.market.services.CustomerService;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@ApplicationScoped
 public class CustomerServiceImpl implements CustomerService {
 
     @PersistenceContext
