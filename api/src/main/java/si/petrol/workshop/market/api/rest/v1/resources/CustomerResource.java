@@ -25,7 +25,6 @@ public class CustomerResource {
     public Response getCustomer(@PathParam("id") String id){
 
         Customer cust = custService.findCustomerById(id);
-
         return Response.ok(cust).build();
 
     }
@@ -34,7 +33,6 @@ public class CustomerResource {
     public Response getAllCustomers(){
 
         List<Customer> custs = custService.findCustomers();
-
         return Response.ok(custs).build();
 
     }
@@ -43,9 +41,7 @@ public class CustomerResource {
     @Path("/count")
     public Response getAllCustomersCount(){
 
-
         CountWrapper custs = custService.findCustomersCount();
-
         return Response.ok(custs).build();
 
     }

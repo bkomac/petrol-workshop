@@ -11,6 +11,8 @@
 
         <class>si.petrol.workshop.market.models.db.AddressEntity</class>
         <class>si.petrol.workshop.market.models.db.CustomerEntity</class>
+        <class>si.petrol.workshop.market.models.db.ProductEntity</class>
+        <class>si.petrol.workshop.market.models.db.SupplierEntity</class>
 
         <class>si.petrol.workshop.market.models.converters.InstantAttributeConverter</class>
         <class>si.petrol.workshop.market.models.converters.LocalDateAttributeConverter</class>
