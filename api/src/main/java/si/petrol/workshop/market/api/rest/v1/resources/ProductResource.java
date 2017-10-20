@@ -2,6 +2,7 @@ package si.petrol.workshop.market.api.rest.v1.resources;
 
 import si.petrol.workshop.market.lib.Product;
 import si.petrol.workshop.market.services.ProductService;
+import si.petrol.workshop.market.services.exceptions.ResourceNotFoundException;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -45,7 +46,7 @@ public class ProductResource {
     }
 
     @POST
-    public Response createProduct(Product newProduct) {
+    public Response createProduct(Product newProduct) throws ResourceNotFoundException {
 
         Product prod = prodService.addProduct((newProduct));
 

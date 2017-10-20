@@ -1,18 +1,16 @@
 package si.petrol.workshop.market.services.impl;
 
 import si.petrol.workshop.market.lib.Product;
-import si.petrol.workshop.market.mappers.CustomerMapper;
 import si.petrol.workshop.market.mappers.ProductMapper;
-import si.petrol.workshop.market.models.db.CustomerEntity;
 import si.petrol.workshop.market.models.db.ProductEntity;
 import si.petrol.workshop.market.models.db.SupplierEntity;
 import si.petrol.workshop.market.services.ProductService;
+import si.petrol.workshop.market.services.exceptions.ResourceNotFoundException;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,10 +33,10 @@ public class ProductServiceImpl implements ProductService {
 
         TypedQuery<ProductEntity> q1 = em.createNamedQuery("ProductEntitiy.findAll", ProductEntity.class);
 
-        if(limit != null)
+        if (limit != null)
             q1.setMaxResults(limit);
 
-        if(offset != null)
+        if (offset != null)
             q1.setFirstResult(offset);
 
         List<ProductEntity> prodEnt = q1.getResultList();
@@ -51,31 +49,29 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product addProduct(Product product) {
+    public Product addProduct(Product product) throws ResourceNotFoundException {
 
         ProductEntity prodEnt = ProductMapper.toProductEntity(product, new ProductEntity());
 
         if (prodEnt.getSupplier() != null) {
             SupplierEntity suplEnt = em.find(SupplierEntity.class, prodEnt.getSupplier().getId());
 
-            if (suplEnt != null) {
-
-                prodEnt.setSupplier(suplEnt);
-
-
-            } else {
-                prodEnt.setSupplier(null);
-            }
+            if (suplEnt == null)
+                throw new ResourceNotFoundException("Suplier ni bil podan sploh.");
 
 
-        } else {
+            prodEnt.setSupplier(suplEnt);
+
+
+        }
+        /*else {
             SupplierEntity suplEnt = new SupplierEntity();
             suplEnt.setId(product.getSupplier().getId());
             suplEnt.setCompanyName("Petrol d.d.");
 
             ArrayList<ProductEntity> products = new ArrayList<ProductEntity>();
             products.add(prodEnt);
-        }
+        } */
 
 
         em.getTransaction().begin();
