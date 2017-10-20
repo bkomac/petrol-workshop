@@ -11,6 +11,7 @@ import si.petrol.workshop.market.services.beans.MarketErrorCode;
 import si.petrol.workshop.market.services.exceptions.IdMismatchException;
 import si.petrol.workshop.market.services.exceptions.MarketException;
 import si.petrol.workshop.market.services.exceptions.ResourceNotFoundException;
+import si.petrol.workshop.market.services.interceptors.RollBack;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
@@ -23,6 +24,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @ApplicationScoped
+@RollBack
 public class CartServiceImpl implements CartService {
 
     @PersistenceContext

@@ -56,7 +56,7 @@ public class CartResource {
 
         Cart cart = cartService.removeItemFromCart(cartId, itemId);
 
-        return Response.status(Response.Status.OK).entity(cart).build();
+        return Response.status(Response.Status.GONE).entity(cart).build();
     }
 
 }
