@@ -49,18 +49,30 @@ public class ProductServiceImpl implements ProductService {
 
         ProductEntity prodEnt = ProductMapper.toProductEntity(product, new ProductEntity());
 
-        SupplierEntity suplEnt = new SupplierEntity();
-        suplEnt.setId(product.getSupplier().getId());
-        suplEnt.setCompanyName("Petrol d.d.");
+        if (prodEnt.getSupplier() != null) {
+            SupplierEntity suplEnt = em.find(SupplierEntity.class, prodEnt.getSupplier().getId());
 
-        ArrayList<ProductEntity> products = new ArrayList<ProductEntity>();
-        products.add(prodEnt);
+            if (suplEnt != null) {
 
-        suplEnt.setProducts(products);
-        prodEnt.setSupplier(suplEnt);
+                prodEnt.setSupplier(suplEnt);
+
+
+            } else {
+                prodEnt.setSupplier(null);
+            }
+
+
+        } else {
+            SupplierEntity suplEnt = new SupplierEntity();
+            suplEnt.setId(product.getSupplier().getId());
+            suplEnt.setCompanyName("Petrol d.d.");
+
+            ArrayList<ProductEntity> products = new ArrayList<ProductEntity>();
+            products.add(prodEnt);
+        }
+
 
         em.getTransaction().begin();
-        em.persist(suplEnt);
         em.persist(prodEnt);
         em.getTransaction().commit();
 
