@@ -7,6 +7,8 @@ import si.petrol.workshop.market.models.db.CartEntity;
 import si.petrol.workshop.market.models.db.CartItemEntity;
 import si.petrol.workshop.market.models.db.ProductEntity;
 import si.petrol.workshop.market.services.CartService;
+import si.petrol.workshop.market.services.beans.MarketErrorCode;
+import si.petrol.workshop.market.services.exceptions.MarketException;
 import si.petrol.workshop.market.services.exceptions.ResourceNotFoundException;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -52,7 +54,7 @@ public class CartServiceImpl implements CartService {
             throw new ResourceNotFoundException("Vozliček ne obstaja, še.");
 
         if (cartEntity.getExpiresAt().isAfter(Instant.now().plus(1, ChronoUnit.HOURS)))
-            throw new Exception("Vozliček je utekel...");
+            throw new MarketException(MarketErrorCode.CART_EXPIRED);
 
         CartItemEntity cartItemEntity = CartMapper.toCartItemEntity(catrtItem, new CartItemEntity());
 
@@ -76,9 +78,9 @@ public class CartServiceImpl implements CartService {
                 .anyMatch(ci -> ci.getProduct().getId()
                         .equals(productEnt.getId()));
 
-        if (productExists) {
-            throw new Exception("Ta produkt že obstaja.");
-        }
+        if (productExists)
+            throw new MarketException(MarketErrorCode.CART_ITEM_ALLREADY_IN_CART);
+
         cartItemEntity.setCart(cartEntity);
         cartItemEntity.setProduct(productEnt);
         cartItemEntity.setCurrency(productEnt.getCurrency());
