@@ -29,9 +29,9 @@ public class ProductResource {
     }
 
     @GET
-    public Response getAllProducts(){
+    public Response getAllProducts(@QueryParam("limit") Integer limit, @QueryParam("offset") Integer offset){
 
-        List<Product> prods = prodService.findProductsAll();
+        List<Product> prods = prodService.findProductsAll(limit, offset);
         return Response.ok(prods).build();
 
     }

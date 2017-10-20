@@ -8,7 +8,7 @@ public interface ProductService {
 
     Product findProduct(String productId);
 
-    List<Product> findProductsAll();
+    List<Product> findProductsAll(Integer limit, Integer offset);
 
     Product addProduct(Product product);
 

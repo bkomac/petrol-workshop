@@ -31,9 +31,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findProductsAll() {
+    public List<Product> findProductsAll(Integer limit, Integer offset) {
 
         TypedQuery<ProductEntity> q1 = em.createNamedQuery("ProductEntitiy.findAll", ProductEntity.class);
+
+        if(limit != null)
+            q1.setMaxResults(limit);
+
+        if(offset != null)
+            q1.setFirstResult(offset);
 
         List<ProductEntity> prodEnt = q1.getResultList();
 
