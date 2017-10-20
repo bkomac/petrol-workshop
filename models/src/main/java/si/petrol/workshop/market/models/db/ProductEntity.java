@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 @NamedQueries({
         @NamedQuery(name = "ProductEntitiy.findAll",
                 query = "SELECT p FROM ProductEntity p ORDER BY p.createdAt DESC "),

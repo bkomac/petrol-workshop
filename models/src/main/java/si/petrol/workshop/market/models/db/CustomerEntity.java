@@ -9,7 +9,7 @@ import javax.xml.bind.ValidationEventLocator;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "customer")
+@Table(name = "customers")
 @NamedQueries({
         @NamedQuery(name = "CustomerEntitiy.findAll",
                 query = "SELECT c FROM CustomerEntity c ORDER BY c.createdAt DESC "),
@@ -28,7 +28,7 @@ public class CustomerEntity extends BaseEntity
     private CustomerStatus status;
     @Column(name = "email")
     private String email;
-    @Column(name = "date_birth")
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
 

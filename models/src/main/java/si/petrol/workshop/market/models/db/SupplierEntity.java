@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "supplier")
+@Table(name = "suppliers")
 public class SupplierEntity extends BaseEntity {
     @Column(name = "company_name")
     private String companyName;
