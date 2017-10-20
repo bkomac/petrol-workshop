@@ -8,6 +8,7 @@ import si.petrol.workshop.market.models.db.CartItemEntity;
 import si.petrol.workshop.market.models.db.ProductEntity;
 import si.petrol.workshop.market.services.CartService;
 import si.petrol.workshop.market.services.beans.MarketErrorCode;
+import si.petrol.workshop.market.services.exceptions.IdMismatchException;
 import si.petrol.workshop.market.services.exceptions.MarketException;
 import si.petrol.workshop.market.services.exceptions.ResourceNotFoundException;
 
@@ -99,7 +100,24 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cart removeItemFromCart(String cartId, String itemId) {
-        return null;
+    public Cart removeItemFromCart(String cartId, String itemId) throws ResourceNotFoundException {
+
+        CartItemEntity cartItemEnt = em.find(CartItemEntity.class, itemId);
+
+        if(cartItemEnt == null)
+            throw new  ResourceNotFoundException("Ni takega vozlička");
+
+        CartEntity cartEnt = cartItemEnt.getCart();
+
+        if(!cartEnt.getId().equals(cartId))
+            throw new IdMismatchException(cartId,cartEnt.getId());
+
+        em.getTransaction().begin();
+        em.remove(cartItemEnt);
+        cartEnt.getItems().remove(cartItemEnt);
+        em.getTransaction().commit();
+
+
+        return CartMapper.toCart(cartEnt);
     }
 }

@@ -12,7 +12,7 @@ public interface CartService {
 
     Cart addItemToCartById(CartItem catrtItem, String cartId) throws Exception;
 
-    Cart removeItemFromCart(String cartId, String itemId);
+    Cart removeItemFromCart(String cartId, String itemId) throws ResourceNotFoundException;
 
 
 }

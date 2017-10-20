@@ -29,6 +29,7 @@ public class IdMismatchMapper implements ExceptionMapper<IdMismatchException> {
         error.setRef(UUID.randomUUID());
         error.setStatus(400);
         error.setCode("resource.id.mismatch");
+        error.setMessage(exception.getEntityId()+"<>"+exception.getPathId());
 
         logger.trace(exception);
 

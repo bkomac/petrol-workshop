@@ -5,6 +5,7 @@ import si.petrol.workshop.market.lib.CartItem;
 import si.petrol.workshop.market.lib.Customer;
 import si.petrol.workshop.market.lib.responses.CountWrapper;
 import si.petrol.workshop.market.services.CartService;
+import si.petrol.workshop.market.services.exceptions.ResourceNotFoundException;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -51,7 +52,7 @@ public class CartResource {
 
     @DELETE
     @Path("/{cartId}/items/{itemId}")
-    public Response addItemToCart(@PathParam("cartId") String cartId, @PathParam("itemId") String itemId) {
+    public Response addItemToCart(@PathParam("cartId") String cartId, @PathParam("itemId") String itemId) throws ResourceNotFoundException {
 
         Cart cart = cartService.removeItemFromCart(cartId, itemId);
 
