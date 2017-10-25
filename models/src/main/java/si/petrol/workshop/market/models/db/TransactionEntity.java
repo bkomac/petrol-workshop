@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "transactions")
+@Table(name = "transactions_xx")
 public class TransactionEntity extends BaseEntity {
 
     @Column(name = "currency")

@@ -1,6 +1,7 @@
 package si.petrol.workshop.market.services.impl;
 
 import si.petrol.workshop.market.integrations.ExchangeRatesClient;
+import si.petrol.workshop.market.integrations.ProcessorClient;
 import si.petrol.workshop.market.integrations.beans.Rate;
 import si.petrol.workshop.market.lib.Cart;
 import si.petrol.workshop.market.lib.Order;
@@ -9,6 +10,7 @@ import si.petrol.workshop.market.mappers.OrderMapper;
 import si.petrol.workshop.market.models.db.CartEntity;
 import si.petrol.workshop.market.models.db.CustomerEntity;
 import si.petrol.workshop.market.models.db.OrderEntity;
+import si.petrol.workshop.market.models.db.TransactionEntity;
 import si.petrol.workshop.market.services.OrderService;
 import si.petrol.workshop.market.services.beans.MarketErrorCode;
 import si.petrol.workshop.market.services.exceptions.MarketException;
@@ -32,6 +34,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Inject
     private ExchangeRatesClient clinent;
+
+    @Inject
+    private ProcessorClient procClient;
 
 
     @Override
@@ -123,11 +128,23 @@ public class OrderServiceImpl implements OrderService {
         orderEnt.setCurrency("EUR");
 
         //izvedi transakcijo
-        orderEnt.setStatus(OrderStatus.COMPLETED);
+        TransactionEntity tr = new TransactionEntity();
+        tr.setAmount(orderEnt.getTotal());
+        tr.setCurrency(orderEnt.getCurrency());
 
+        procClient.executeTransaction(tr);
+
+
+        if (tr.getStatus().equals(OrderStatus.COMPLETED))
+            orderEnt.setStatus(OrderStatus.COMPLETED);
+        else
+            orderEnt.setStatus(OrderStatus.FAILED);
+
+        em.persist(tr);
+
+        orderEnt.setTransaction(tr);
 
         em.getTransaction().commit();
-
 
         return OrderMapper.toOrder(orderEnt);
     }
