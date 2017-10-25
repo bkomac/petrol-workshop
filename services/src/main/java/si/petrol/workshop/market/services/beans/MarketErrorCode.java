@@ -7,6 +7,7 @@ public enum MarketErrorCode {
     CART_ITEM_ALLREADY_IN_CART("cart.item.already.in.cart"),
     ORDER_INCORRECT_STATE("order.incorrect.state"),
     ORDER_CART_EMPTY("order.cart.empty"),
+    CURRENCY_INVALID("currency.invalid"),
     UNKNOWN("unknown");
 
     private String code;
