@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order createOrder(Order order) throws ResourceNotFoundException, MarketException {
+    public Order createOrder(Order order)  {
         OrderEntity orderEnt = OrderMapper.toOrderEntity(order, new OrderEntity());
 
         if (orderEnt.getCart() == null)
@@ -83,7 +83,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order completeOrder(String id) throws ResourceNotFoundException, MarketException {
+    public Order completeOrder(String id) {
 
         em.getTransaction().begin();
 

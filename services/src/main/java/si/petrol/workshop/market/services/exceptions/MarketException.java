@@ -2,7 +2,7 @@ package si.petrol.workshop.market.services.exceptions;
 
 import si.petrol.workshop.market.services.beans.MarketErrorCode;
 
-public class MarketException extends Exception {
+public class MarketException extends RuntimeException {
 
     private MarketErrorCode errorCode;
 

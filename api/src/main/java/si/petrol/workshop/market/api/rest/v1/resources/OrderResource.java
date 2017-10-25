@@ -33,7 +33,7 @@ public class OrderResource {
     }
 
     @POST
-    public Response createOrder(Order order) throws CardException, MarketException, ResourceNotFoundException {
+    public Response createOrder(Order order) {
 
         Order order2 = orderService.createOrder(order);
         return Response.status(Response.Status.CREATED).entity(order2).build();
