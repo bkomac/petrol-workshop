@@ -1,6 +1,5 @@
 package si.petrol.workshop.market.models.db;
 
-import si.petrol.workshop.market.lib.PaymentMethodInfo;
 import si.petrol.workshop.market.lib.enums.TransactionStatus;
 import si.petrol.workshop.market.models.db.common.BaseEntity;
 
