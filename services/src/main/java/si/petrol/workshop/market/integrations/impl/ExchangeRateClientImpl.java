@@ -2,6 +2,7 @@ package si.petrol.workshop.market.integrations.impl;
 
 import si.petrol.workshop.market.integrations.ExchangeRatesClient;
 import si.petrol.workshop.market.integrations.beans.Rate;
+import si.petrol.workshop.market.services.providers.JacksonProvider;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -17,7 +18,7 @@ public class ExchangeRateClientImpl implements ExchangeRatesClient {
 
     @PostConstruct
     private void init() {
-        client = ClientBuilder.newClient();
+        client = ClientBuilder.newClient().register(JacksonProvider.class);
     }
 
     @Override

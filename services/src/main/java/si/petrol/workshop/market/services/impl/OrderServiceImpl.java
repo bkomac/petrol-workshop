@@ -1,5 +1,7 @@
 package si.petrol.workshop.market.services.impl;
 
+import si.petrol.workshop.market.integrations.ExchangeRatesClient;
+import si.petrol.workshop.market.integrations.beans.Rate;
 import si.petrol.workshop.market.lib.Cart;
 import si.petrol.workshop.market.lib.Order;
 import si.petrol.workshop.market.lib.enums.OrderStatus;
@@ -14,6 +16,7 @@ import si.petrol.workshop.market.services.exceptions.ResourceNotFoundException;
 import si.petrol.workshop.market.services.interceptors.RollBack;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.smartcardio.CardException;
@@ -27,6 +30,9 @@ public class OrderServiceImpl implements OrderService {
     @PersistenceContext
     private EntityManager em;
 
+    @Inject
+    private ExchangeRatesClient clinent;
+
 
     @Override
     public Order findOrderById(String id) {
@@ -35,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order createOrder(Order order)  {
+    public Order createOrder(Order order) {
         OrderEntity orderEnt = OrderMapper.toOrderEntity(order, new OrderEntity());
 
         if (orderEnt.getCart() == null)
@@ -104,11 +110,11 @@ public class OrderServiceImpl implements OrderService {
             } else {
 
                 //get latest exchange rate
-                BigDecimal rate = new BigDecimal("0.5");
+                //BigDecimal rate = new BigDecimal("0.5");
 
+                Rate rate = clinent.findRateByCurrency(i.getCurrency());
 
-
-                return i.getAmount().multiply(rate)
+                return i.getAmount().multiply(rate.getRates().getEur())
                         .setScale(2, BigDecimal.ROUND_HALF_EVEN);
             }
         }).reduce(BigDecimal.ZERO, (c, n) -> n.add(c));
