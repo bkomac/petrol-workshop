@@ -16,6 +16,7 @@ import si.petrol.workshop.market.services.beans.MarketErrorCode;
 import si.petrol.workshop.market.services.exceptions.MarketException;
 import si.petrol.workshop.market.services.exceptions.ResourceNotFoundException;
 import si.petrol.workshop.market.services.interceptors.RollBack;
+import si.petrol.workshop.market.services.workers.QueueManager;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -37,6 +38,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Inject
     private ProcessorClient procClient;
+
+    @Inject
+    private QueueManager manager;
 
 
     @Override
@@ -145,6 +149,9 @@ public class OrderServiceImpl implements OrderService {
         orderEnt.setTransaction(tr);
 
         em.getTransaction().commit();
+
+        //send to rabittMq
+        manager.enqueueCompletedOrder(orderEnt);
 
         return OrderMapper.toOrder(orderEnt);
     }
