@@ -17,6 +17,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.smartcardio.CardException;
+import java.math.BigDecimal;
 import java.time.Instant;
 
 @ApplicationScoped
@@ -56,6 +57,7 @@ public class OrderServiceImpl implements OrderService {
             throw new ResourceNotFoundException("Ni kustomerja...");
 
         orderEnt.setCustomer(customerEnt);
+        orderEnt.setStatus(OrderStatus.NEW);
 
 
         em.getTransaction().begin();
@@ -81,7 +83,43 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order completeOrder(String id) {
-        return null;
+    public Order completeOrder(String id) throws ResourceNotFoundException, MarketException {
+
+        em.getTransaction().begin();
+
+        OrderEntity orderEnt = em.find(OrderEntity.class, id);
+
+        if (orderEnt == null)
+            throw new ResourceNotFoundException("Ni takega naročila");
+
+        if (!orderEnt.getStatus().equals(OrderStatus.NEW))
+            throw new MarketException(MarketErrorCode.ORDER_INCORRECT_STATE);
+
+        if (orderEnt.getCart().getItems() == null || orderEnt.getCart().getItems().isEmpty())
+            throw new MarketException(MarketErrorCode.ORDER_CART_EMPTY);
+
+        BigDecimal finalPrice = orderEnt.getCart().getItems().stream().map(i -> {
+            if (i.getCurrency().equals("EUR")) {
+                return i.getAmount();
+            } else {
+
+                //get latest exchange rate
+                BigDecimal rate = new BigDecimal("0.5");
+                return i.getAmount().multiply(rate)
+                        .setScale(2, BigDecimal.ROUND_HALF_EVEN);
+            }
+        }).reduce(BigDecimal.ZERO, (c, n) -> n.add(c));
+
+        orderEnt.setTotal(finalPrice);
+        orderEnt.setCurrency("EUR");
+
+        //izvedi transakcijo
+        orderEnt.setStatus(OrderStatus.COMPLETED);
+
+
+        em.getTransaction().commit();
+
+
+        return OrderMapper.toOrder(orderEnt);
     }
 }

@@ -5,9 +5,11 @@ import si.petrol.workshop.market.lib.CartItem;
 import si.petrol.workshop.market.lib.Order;
 import si.petrol.workshop.market.services.exceptions.MarketException;
 import si.petrol.workshop.market.services.exceptions.ResourceNotFoundException;
+import si.petrol.workshop.market.services.interceptors.RollBack;
 
 import javax.smartcardio.CardException;
 
+@RollBack
 public interface OrderService {
 
     Order findOrderById(String id);
@@ -16,5 +18,5 @@ public interface OrderService {
 
     Order cancelOrder(String id);
 
-    Order completeOrder(String id);
+    Order completeOrder(String id) throws ResourceNotFoundException, MarketException;
 }

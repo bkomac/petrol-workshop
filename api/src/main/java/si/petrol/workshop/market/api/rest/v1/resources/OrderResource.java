@@ -41,7 +41,7 @@ public class OrderResource {
 
     @POST
     @Path("/{id}/complete")
-    public Response completeOrder(@PathParam("id") String id) {
+    public Response completeOrder(@PathParam("id") String id) throws ResourceNotFoundException, MarketException {
 
         Order order = orderService.completeOrder(id);
         return Response.status(Response.Status.ACCEPTED).entity(order).build();
