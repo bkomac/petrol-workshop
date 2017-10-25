@@ -1,5 +1,6 @@
 package si.petrol.workshop.market.models.db;
 
+import si.petrol.workshop.market.lib.enums.PaymentMethodType;
 import si.petrol.workshop.market.lib.enums.TransactionStatus;
 import si.petrol.workshop.market.models.db.common.BaseEntity;
 
@@ -7,37 +8,47 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "transactions_xx")
+@Table(name = "transactions")
 public class TransactionEntity extends BaseEntity {
 
     @Column(name = "currency")
     private String currency;
+
     @Column(name = "amount")
     private BigDecimal amount;
+
     @Column(name = "nonce")
     private String nonce;
-    @Enumerated(value = EnumType.STRING)
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private TransactionStatus status;
+
     @Column(name = "gateway_decline_code")
     private String gatewayDeclineCode;
-    @Column(name = "process_response_code")
+
+    @Column(name = "processor_response_code")
     private String processorResponseCode;
-    @Column(name = "process_response_text")
+
+    @Column(name = "processor_response_text")
     private String processorResponseText;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "payment_method_type")
+    private PaymentMethodType paymentMethodType;
+
+    @Column(name = "gateway_transaction_id")
+    private String gatewayTransactionId;
 
     @Embedded
     private PaymentMethodInfoEntity paymentMethodInfo;
 
-    @Column(name = "gateway_trans_id")
-    private String gatewayTransactionId;
-
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "bill_address_id")
+    @JoinColumn(name = "billing_address_id")
     private AddressEntity billingAddress;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ship_address_id")
+    @JoinColumn(name = "shipping_address_id")
     private AddressEntity shippingAddress;
 
     public String getCurrency() {
