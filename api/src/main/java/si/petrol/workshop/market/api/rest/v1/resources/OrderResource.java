@@ -5,10 +5,12 @@ import si.petrol.workshop.market.lib.CartItem;
 import si.petrol.workshop.market.lib.Order;
 import si.petrol.workshop.market.services.CartService;
 import si.petrol.workshop.market.services.OrderService;
+import si.petrol.workshop.market.services.exceptions.MarketException;
 import si.petrol.workshop.market.services.exceptions.ResourceNotFoundException;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.smartcardio.CardException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -31,7 +33,7 @@ public class OrderResource {
     }
 
     @POST
-    public Response createOrder(Order order) {
+    public Response createOrder(Order order) throws CardException, MarketException, ResourceNotFoundException {
 
         Order order2 = orderService.createOrder(order);
         return Response.status(Response.Status.CREATED).entity(order2).build();
