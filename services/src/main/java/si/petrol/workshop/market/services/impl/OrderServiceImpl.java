@@ -105,6 +105,9 @@ public class OrderServiceImpl implements OrderService {
 
                 //get latest exchange rate
                 BigDecimal rate = new BigDecimal("0.5");
+
+
+
                 return i.getAmount().multiply(rate)
                         .setScale(2, BigDecimal.ROUND_HALF_EVEN);
             }
